@@ -8,22 +8,24 @@ import cv2
 #from plyer import notification
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
-# Windows通知を利用する場合は 8行目/ 107行目/ 153行目のコメントアウトを削除してください． ※利用するにはPlyerモジュールのインポートが必要です．
+# Windows通知を利用する場合は 8行目/ 107行目のコメントアウトを削除してください． ※利用するにはPlyerモジュールのインポートが必要です．
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
-class ScarletViolet(ImageProcPythonCommand):
-	NAME = '[SV]S0赫月ガチグマ厳選'
-
-	def __init__(self, cam):
+class ScarletViolet2(ImageProcPythonCommand):
+	NAME = '[SV]A0S0赫月ガチグマ厳選'
+	def __init__(self, cam,Speed):
 		super().__init__(cam)
 		self.cam = cam
 
 	def do(self):
 		print("\n\n--------------------------------------------------")
-		print("\nDeveloped By お修羅 -OSHURA- (@_Oshura_)")
+		print("\nDeveloped By Syumiru (@PokeSyumiru)")
+		print("\nSpecial Thanks to お修羅 (@_Oshura_)")
+		print("\nSpecial Thanks to こちゃてす (@kochatece12)") 
+		print("\nSpecial Thanks to PokeconDeveloppers") 
 		print("\n--------------------------------------------------")
 		print("\n・サザレの目の前に立ったらレポートを書きましょう")
-		print("\n・すばやさ数値78のポケモンを先頭に置きましょう")
+		print("\n・カイオーガ等ワンパンできるポケモン必須")
 		print("\n--------------------------------------------------")
 		print("\n以上の項目をしっかり確認したらスタートしましょう")
 		print("\n--------------------------------------------------\n\n")
@@ -36,7 +38,7 @@ class ScarletViolet(ImageProcPythonCommand):
 		# 作者の環境では約18秒でしたが厳選に使用するデータの環境に合わせて適宜編集してください．
 		self.WAIT_TIME = 18.0
 		# LINE Notifyで発行したトークンを貼るとLINE通知が利用できます．利用しない場合はデフォルトのままでOK．エラー通知に利用します．
-		self.Line_Notify_Token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+		self.Line_Notify_Token = "Gdp1DVv9ODbmsbd7Ci4OSfXP9EgQOAM2mdDCsmWJrJ2"
 		# LINE送信のテストを行う場合は1，テストを行わない場合は0を入力してください．1にするとプログラム開始時に送信テストを行ったのち停止します．
 		self.LINE_TEST = 0
 		# ----------------------------------------------------------------------------------------------------------------------
@@ -44,7 +46,7 @@ class ScarletViolet(ImageProcPythonCommand):
 		# 海外言語で厳選する方は以下をご確認ください ---------------------------------------------------------------------------------
 		# 日本語以外のガチグマを厳選する場合、画像認識に使用するキャプチャの書き換えが必須となります．
 		# 戦闘画面で技選択後，画面下部に表示される「野生のガチグマの～」の「ガチグマ」に該当する部分をPoke-Controllerでキャプチャしてください．
-		# 余白を入れないように文字だけを切り取ったら，SV_GACHIGUMAフォルダにGACHIGUMA_ATTACK.pngの名称で保存してください．
+		# 余白を入れないように文字だけを切り取ったら，SV_A0_A0S0GACHIGUMAフォルダにGACHIGUMA_ATTACK.pngの名称で保存してください．
 		# キャプチャ書き換え後に戦闘画面で正常に読み取りできない場合は当プログラム99行目の座標を編集してください．
 		# -----------------------------------------------------------------------------------------------------------------------
 
@@ -54,7 +56,8 @@ class ScarletViolet(ImageProcPythonCommand):
 		self.ERROR_COUNT = 0
 		# プログラム開始時から時間を計測
 		Program_start = time.time()
-
+		# パラメータ0の時対象外、1の時対象
+		self.Speed = 0
 		# LINE通知テストを行う場合はここを通る
 		if self.LINE_TEST == 1:
 			print("\n-----------------------------")
@@ -83,41 +86,148 @@ class ScarletViolet(ImageProcPythonCommand):
 			print(f"\n周回数：{self.LOOP_COUNT} エラー: {self.ERROR_COUNT} / {(int(Time_Clock / 3600))}時間 {(int(Time_Clock / 60) % 60)}分 {(int(Time_Clock % 60))}秒")
 			print("\n---------------------------------------\n")
 			# 赫月ガチグマとの戦闘画面になるまでAボタン連打
-			while not self.isContainTemplate('SV_GACHIGUMA/!!!!.png', 0.97, use_gray=False, show_value=False):
+			while not self.isContainTemplate('SV_A0_A0S0GACHIGUMA/!!!!.png', 0.97, use_gray=False, show_value=False):
 				self.press(Button.A,0.05,0.05)
 			self.wait(0.5)
 			print("\n---------------------------------------")
 			print("\n★赫月ガチグマとエンカウント 戦闘開始★")
 			print("\n---------------------------------------")
 			# コマンド出現まで待機
-			while not self.isContainTemplate('SV_GACHIGUMA/BATTLE_COMMANDS.png', 0.8, use_gray=True, show_value=False):
+			while not self.isContainTemplate('SV_A0_A0S0GACHIGUMA/BATTLE_COMMANDS.png', 0.8, use_gray=True, show_value=False):
 				self.wait(0.5)
 			self.wait(1.0)
 			# 攻撃コマンドを選択
 			self.pressRep(Button.A, repeat=2, duration=0.05, interval=0.8, wait=1.7)
-			# 赫月ガチグマに先制を取られた場合はS0ではない
-			if self.isContainTemplateSuper('SV_GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], 0.8, use_gray=True, show_value=False):
+			# 演出待機
+			self.wait(16.5)
+			# 判定
+			# 捕まえるを選択
+			self.press(Button.A,0.05,0.05)
+			self.wait(0.6)
+			# ボール選択
+			# 左を押下
+			self.press(Direction.LEFT, wait=0.3)
+			# 左を押下
+			self.press(Direction.LEFT, wait=0.3)
+			# 左を押下
+			self.press(Direction.LEFT, wait=0.3)
+			# ムーンボールを選択
+			self.press(Button.A,0.05,0.05)
+			self.wait(20.0)
+			# 図鑑登録でテキスト送り
+			self.press(Button.A,0.05,0.05)
+			self.wait(1.0)
+			# ステータス確認
+			# 下を押下
+			self.press(Direction.DOWN, wait=0.5)
+			# ガチグマのステータス確認を選択
+			self.press(Button.A,0.05,0.05)
+			self.wait(1.0)
+			# ガチグマのステータス画面へ移行
+			self.press(Direction.RIGHT, wait=1.0)
+			# 攻撃判定（103判定）
+			if self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
-				print("\n★赫月ガチグマがS0である可能性: なし★")
+				print("\n★A0-1です★")
 				print("\n---------------------------------------")
-				# ソフトリセット
-				self.SOFT_RESET()
-			# 手持ちのポケモンが先制を取った場合はS0かも
-			else:
-				#notification.notify(title='★S0赫月ガチグマ厳選',message='S0出現の可能性あり',app_name='Poke-Controller')
+				# A0を厳選する場合
+				if self.Speed == 0:
+					#notification.notify(title='★S0赫月ガチグマ厳選',message='S0出現の可能性あり',app_name='Poke-Controller')
+					print("\n---------------------------------------")
+					print("\n★A0-1赫月ガチグマを捕獲しました★")
+					print("\n---------------------------------------")
+					# 少しだけ待つ
+					self.wait(5.0)
+					# 動画を保存する
+					self.press(Button.CAPTURE,1.0,5.0)
+					# Syumiru Add Start 20230916
+					# 厳選完了報告をLINEに送信します
+					self.LINE_Message("🖋LINE通知\n"
+								f"赫月ガチグマを捕獲しました\n"
+								f"確認お願いします。", True)
+					# HOMEボタンを長押ししてスリープ
+					self.press(Button.HOME,2,2)
+					self.press(Button.A,0.05,0.05)
+					# Syumiru Add  Ehd  20230916
+					# プログラムを終了する
+					self.finish()
+				# A0かつS0を厳選する場合
+				else:
+				# 素早さ判定（77判定）
+					if self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+						print("\n---------------------------------------")
+						print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
+						print("\n---------------------------------------")
+						# 少しだけ待つ
+						self.wait(5.0)
+						# 動画を保存する
+						self.press(Button.CAPTURE,1.0,5.0)
+						# Syumiru Add Start 20230916
+						# 厳選完了報告をLINEに送信します
+						self.LINE_Message("🖋LINE通知\n"
+									f"A0-1かつS0の\n"
+									f"赫月ガチグマを捕獲しました", True)
+						# HOMEボタンを長押ししてスリープ
+						self.press(Button.HOME,2,2)
+						self.press(Button.A,0.05,0.05)
+						# Syumiru Add  Ehd  20230916
+						# プログラムを終了する
+						self.finish()
+					# 素早さ判定（78判定）
+					elif self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+						print("\n---------------------------------------")
+						print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
+						print("\n---------------------------------------")
+						# 少しだけ待つ
+						self.wait(5.0)
+						# 動画を保存する
+						self.press(Button.CAPTURE,1.0,5.0)
+						# Syumiru Add Start 20230916
+						# 厳選完了報告をLINEに送信します
+						self.LINE_Message("🖋LINE通知\n"
+									f"A0-1かつS1の\n"
+									f"赫月ガチグマを捕獲しました", True)
+						# HOMEボタンを長押ししてスリープ
+						self.press(Button.HOME,2,2)
+						self.press(Button.A,0.05,0.05)
+						# Syumiru Add  Ehd  20230916
+						# プログラムを終了する
+						self.finish()
+			# 攻撃判定（124判定）※テスト
+			if self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  0.9, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
-				print("\n★赫月ガチグマがS0である可能性: あり★")
+				print("\nA31です")
+				print("\n---------------------------------------")	
+			# 攻撃判定（103判定）※テスト
+			elif self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
-				# 少しだけ待つ
-				self.wait(5.0)
-				# 動画を保存する
-				self.press(Button.CAPTURE,1.0,5.0)
-				# プログラムを終了する
-				self.finish()
+				print("\nA0-1です")
+				print("\n---------------------------------------")	
+			# 素早さ判定（99判定）※テスト
+			if self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				print("\n---------------------------------------")
+				print("\nS31です")
+				print("\n---------------------------------------")
+			# 素早さ判定（77判定）※テスト
+			elif self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				print("\n---------------------------------------")
+				print("\nS0です")
+				print("\n---------------------------------------")
+			# 素早さ判定（78判定）※テスト
+			elif self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				print("\n---------------------------------------")
+				print("\nS1です")
+				print("\n---------------------------------------")
+			print("\n---------------------------------------")
+			print("\n5秒後にソフトリセットします")
+			print("\n---------------------------------------")
+			self.wait(5.0)	
+			# ソフトリセット
+			self.SOFT_RESET()
 			# プログラムの先頭に戻る
-			self.wait(0.5)
-
-	# ソフトリセット用の関数
+			self.wait(0.5)						
+   
+	# ソフトリセット用の関数(関数作成：お修羅さん(@_Oshura_))
 	def SOFT_RESET(self):
 		self.SOFT_ERROR = False
 		while True:
@@ -133,14 +243,14 @@ class ScarletViolet(ImageProcPythonCommand):
 			# ソフトを開く
 			self.pressRep(Button.A, repeat=5, duration=0.05, interval=0.5)
 			# ゲーフリロゴを認識したら7.0秒後にAボタンを入力
-			while not (self.isContainTemplate('SV_GACHIGUMA/OPENING.png',0.8, use_gray=True, show_value=False)):
+			while not (self.isContainTemplate('SV_A0_A0S0GACHIGUMA/OPENING.png',0.8, use_gray=True, show_value=False)):
 				self.wait(0.1)
 			self.wait(7.0)
 			self.pressRep(Button.A, repeat=5, duration=0.05, interval=0.5)
 			# フィールド画面に移行するまで待機する
 			self.wait(self.WAIT_TIME)
 			# 起動直後にソフトエラー表示が出ることがあるためチェックを行う
-			if self.isContainTemplate('SV_GACHIGUMA/ERROR.png',0.8, use_gray=True, show_value=False):
+			if self.isContainTemplate('SV_A0_A0S0GACHIGUMA/ERROR.png',0.8, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\n★ソフトリセット中にエラーが発生しました★")
 				print("\n---------------------------------------")
@@ -149,7 +259,7 @@ class ScarletViolet(ImageProcPythonCommand):
 				self.SOFT_ERROR = True
 				self.ERROR_COUNT += 1
 			# 本体の再起動が必要なエラーが出ている場合は直ちにプログラムを停止する
-			elif self.isContainTemplate('SV_GACHIGUMA/ERROR_2.png',0.8, use_gray=True, show_value=False):
+			elif self.isContainTemplate('SV_A0_A0S0GACHIGUMA/ERROR_2.png',0.8, use_gray=True, show_value=False):
 				#notification.notify(title='★S0赫月ガチグマ厳選',message='危険なエラーが発生したため動作を停止します',app_name='Poke-Controller')
 				self.LINE_image(f"ERROR通知\n危険なエラーが発生しているため\nプログラムの動作を停止しました\nプログラム名: S0赫月ガチグマ厳選", True)
 				print("\n---------------------------------------")
