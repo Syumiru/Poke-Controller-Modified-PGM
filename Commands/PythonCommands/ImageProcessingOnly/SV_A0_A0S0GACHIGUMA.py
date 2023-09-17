@@ -8,7 +8,7 @@ import cv2
 #from plyer import notification
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
-# Windows通知を利用する場合は 8行目のコメントアウトを削除してください． ※利用するにはPlyerモジュールのインポートが必要です．
+# Windows通知を利用する場合は #notification.notifyのコメントアウトを削除してください． ※利用するにはPlyerモジュールのインポートが必要です．
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
 class ScarletViolet2(ImageProcPythonCommand):
@@ -37,7 +37,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 		# ソフトリセット時にオープニング画面でAボタンを押してからフィールド画面に移行するまでの待機時間．
 		# 作者の環境では約18秒でしたが厳選に使用するデータの環境に合わせて適宜編集してください．
 		self.WAIT_TIME = 18.0
-		# LINE Notifyで発行したトークンを貼るとLINE通知が利用できます．利用しない場合はデフォルトのままでOK．エラー通知に利用します．
+		# LINE Notifyで発行したトークンを貼るとLINE通知が利用できます．利用しない場合はデフォルトのままでOK．エラー通知、捕獲通知に利用します．
 		self.Line_Notify_Token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 		# LINE送信のテストを行う場合は1，テストを行わない場合は0を入力してください．1にするとプログラム開始時に送信テストを行ったのち停止します．
 		self.LINE_TEST = 0
@@ -56,7 +56,8 @@ class ScarletViolet2(ImageProcPythonCommand):
 		self.ERROR_COUNT = 0
 		# プログラム開始時から時間を計測
 		Program_start = time.time()
-		# パラメータ0の時対象外、1の時対象
+		# 捕獲対象設定
+		# 0の場合A0-1、1の場合A0-1かつS0-1を捕獲対象とする
 		self.Speed = 0
 		# LINE通知テストを行う場合はここを通る
 		if self.LINE_TEST == 1:
@@ -104,6 +105,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			# 捕まえるを選択
 			self.press(Button.A,0.05,0.05)
 			self.wait(0.6)
+   
 			# ボール選択
 			# 左を押下
 			self.press(Direction.LEFT, wait=0.3)
@@ -113,6 +115,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			self.press(Direction.LEFT, wait=0.3)
 			# ムーンボールを選択
 			self.press(Button.A,0.05,0.05)
+   
 			self.wait(20.0)
 			# 図鑑登録でテキスト送り
 			self.press(Button.A,0.05,0.05)
@@ -136,19 +139,20 @@ class ScarletViolet2(ImageProcPythonCommand):
 					print("\n---------------------------------------")
 					print("\n★A0-1赫月ガチグマを捕獲しました★")
 					print("\n---------------------------------------")
+					"""
+					# LINE通知機能
 					# 少しだけ待つ
 					self.wait(5.0)
 					# 動画を保存する
 					self.press(Button.CAPTURE,1.0,5.0)
-					# Syumiru Add Start 20230916
 					# 厳選完了報告をLINEに送信します
 					self.LINE_Message("🖋LINE通知\n"
 								f"赫月ガチグマを捕獲しました\n"
 								f"確認お願いします。", True)
+					"""
 					# HOMEボタンを長押ししてスリープ
 					self.press(Button.HOME,2,2)
 					self.press(Button.A,0.05,0.05)
-					# Syumiru Add  Ehd  20230916
 					# プログラムを終了する
 					self.finish()
 				# A0かつS0を厳選する場合
@@ -158,19 +162,20 @@ class ScarletViolet2(ImageProcPythonCommand):
 						print("\n---------------------------------------")
 						print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
+						"""
+						# LINE通知機能
 						# 少しだけ待つ
 						self.wait(5.0)
 						# 動画を保存する
 						self.press(Button.CAPTURE,1.0,5.0)
-						# Syumiru Add Start 20230916
 						# 厳選完了報告をLINEに送信します
 						self.LINE_Message("🖋LINE通知\n"
 									f"A0-1かつS0の\n"
 									f"赫月ガチグマを捕獲しました", True)
+						"""
 						# HOMEボタンを長押ししてスリープ
 						self.press(Button.HOME,2,2)
 						self.press(Button.A,0.05,0.05)
-						# Syumiru Add  Ehd  20230916
 						# プログラムを終了する
 						self.finish()
 					# 素早さ判定（78判定）
@@ -178,22 +183,24 @@ class ScarletViolet2(ImageProcPythonCommand):
 						print("\n---------------------------------------")
 						print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
+						"""
+						# LINE通知機能
 						# 少しだけ待つ
 						self.wait(5.0)
 						# 動画を保存する
 						self.press(Button.CAPTURE,1.0,5.0)
-						# Syumiru Add Start 20230916
 						# 厳選完了報告をLINEに送信します
 						self.LINE_Message("🖋LINE通知\n"
 									f"A0-1かつS1の\n"
 									f"赫月ガチグマを捕獲しました", True)
+						"""
 						# HOMEボタンを長押ししてスリープ
 						self.press(Button.HOME,2,2)
 						self.press(Button.A,0.05,0.05)
-						# Syumiru Add  Ehd  20230916
 						# プログラムを終了する
 						self.finish()
-			# 攻撃判定（124判定）※テスト
+			"""# 実数値判定テスト機能
+   			# 攻撃判定（124判定）※テスト
 			if self.isContainTemplateSuper('SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  0.9, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\nA31です")
@@ -222,6 +229,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			print("\n5秒後にソフトリセットします")
 			print("\n---------------------------------------")
 			self.wait(5.0)	
+			"""
 			# ソフトリセット
 			self.SOFT_RESET()
 			# プログラムの先頭に戻る
