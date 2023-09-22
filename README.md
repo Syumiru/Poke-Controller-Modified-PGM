@@ -55,13 +55,13 @@ A0-1かつS0-1を狙う場合はパラメータを1に設定変更して下さ�
 <br>
 2通りあります。
 <br>
-【1つ目の方法】
+方法①
 <br>
 右上緑色のcode→（codespacrタブが開かれている場合は）local→Download ZIPを押下しDL
 <br>
 \Poke-Controller-Modified\SerialController\にコピペして下さい。
 <br>
-【2つ目の方法】
+方法②
 <br>
 ReleasesからSource code(zip)をDL
 <br>
