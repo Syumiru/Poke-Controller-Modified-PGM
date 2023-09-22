@@ -53,7 +53,19 @@ A0-1かつS0-1を狙う場合はパラメータを1に設定変更して下さ�
 
 【導入方法】
 <br>
+2通りあります。
+<br>
+【1つ目の方法】
+<br>
+右上緑色のcode→（codespacrタブが開かれている場合は）local→Download ZIPを押下しDL
+<br>
 \Poke-Controller-Modified\SerialController\にコピペして下さい。
+<br>
+【2つ目の方法】
+<br>
+ReleasesからSource code(zip)をDL
+<br>
+解凍後、Poke-Controller-Modified-PGM-x.x.x内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
 
 【特記事項】
 <br>
