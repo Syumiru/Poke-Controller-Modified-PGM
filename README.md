@@ -45,7 +45,8 @@ ReleasesからSource code(zip)をDL
 
 1周3分ほどなので1時間で20回捕獲します。
 <br>
-S0-1ガチグマを手早く厳選したい方はお修羅さんのPGM（https://drive.google.com/drive/u/0/folders/1RIktFkyo1QeqIJUd81McMMMUVlyo6F9O）がおすすめです。
+S0-1ガチグマを手早く厳選したい方はお修羅さんのPGMがおすすめです。
+https://drive.google.com/drive/u/0/folders/1RIktFkyo1QeqIJUd81McMMMUVlyo6F9O
 <br>
 1周2分ほどでしたので1時間で30回捕獲チャンスがあります。
 
