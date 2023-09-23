@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from Commands.PythonCommandBase import PythonCommand, ImageProcPythonCommand
-from Commands.Keys import KeyPress, Button, Direction, Stick
-import time
+from Commands.Keys import Button
 import cv2
 import configparser
 
-	#iniファイルを参照する
+# iniファイルを参照する
 def Config_Read(self):
+    
 	config = configparser.ConfigParser()
 	config.read('./Template/Syumiru/setting.ini', encoding='utf-8')
+ 
+	SV = 'SV'
+	Game_Start_Wait_Time = 'Game_Start_Wait_Time'
+ 
+	self.Game_Start_Wait_Time = config.getfloat(SV,Game_Start_Wait_Time)
  
 	LINE_Notify = 'LINE_Notify'
 	Line_Notify_Switch = 'Line_Notify_Switch' 
@@ -26,6 +30,7 @@ def Config_Read(self):
 	Choice_Ball ='Choice_Ball'
 	Pokedex ='Pokedex'
 	Test_Check_Status = 'Test_Check_Status'
+ 
 	self.Check_Speed = config.getint(SV_A0_A0S0GACHIGUMA,Check_Speed)
 	self.Choice_Ball = config.getint(SV_A0_A0S0GACHIGUMA,Choice_Ball)
 	self.Pokedex = config.getint(SV_A0_A0S0GACHIGUMA,Pokedex)
@@ -33,8 +38,10 @@ def Config_Read(self):
  
 	SV_C0_Paojian = 'SV_C0_Paojian'
 	No_Correction_Only = 'No_Correction_Only'
+ 
 	self.No_Correction_Only = config.getint(SV_C0_Paojian,No_Correction_Only)
  
+# ソフトリセット用の関数(元関数作成：お修羅さん(@_Oshura_))
 def LINE_TEST(self):
 	# LINE通知テストを行う場合はここを通る
 	if self.LINE_TEST == 1:
@@ -127,41 +134,7 @@ def isContainTemplateSuper(self, template_path, search_range, threshold=0.7, use
 		else:
 			return False
 
-# 画面内の座標を指定して認識を行うための関数(こちゃてす@kochatece12さんのプログラムからお借りしています)
-def isContainTemplateSuper(self, template_path, search_range, threshold=0.7, use_gray=True, show_value=False,print_value=0.5,Coordinate=False):
-	TEMPLATE_PATH = "./Template/"
-	src = self.camera.readFrame()
-	# ↓座標を指定する場合は [y座標最小,y座標最大,x座標最小,x座標最大] で入力します
-	src = src[search_range[0]:search_range[1],search_range[2]:search_range[3]]
-	src = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY) if use_gray else src
-
-	template = cv2.imread(TEMPLATE_PATH+template_path, cv2.IMREAD_GRAYSCALE if use_gray else cv2.IMREAD_COLOR)
-	w, h = template.shape[1], template.shape[0]
-
-	method = cv2.TM_CCOEFF_NORMED
-	res = cv2.matchTemplate(src, template, method)
-	_, max_val, _, max_loc = cv2.minMaxLoc(res)
-
-	if show_value:
-		if max_val > print_value:
-			print(template_path + ' value: ' + str(round(max_val,3)))
-	
-	top_left = max_loc
-	bottom_right = (top_left[0] + w, top_left[1] + h)
-	if max_val > threshold:
-		if use_gray:
-			src = cv2.cvtColor(src, cv2.COLOR_GRAY2BGR)
-		if Coordinate:
-			return True, bottom_right
-		else:
-			return True
-	else:
-		if Coordinate:
-			return False, bottom_right
-		else:
-			return False
-
-# ソフトリセット用の関数(関数作成：お修羅さん(@_Oshura_))
+# ソフトリセット用の関数(元関数作成：お修羅さん(@_Oshura_))
 def SOFT_RESET(self):
 	self.SOFT_ERROR = False
 	while True:
@@ -182,7 +155,7 @@ def SOFT_RESET(self):
 		self.wait(7.0)
 		self.pressRep(Button.A, repeat=5, duration=0.05, interval=0.5)
 		# フィールド画面に移行するまで待機する
-		self.wait(self.WAIT_TIME)
+		self.wait(self.Game_Start_Wait_Time)
 		# 起動直後にソフトエラー表示が出ることがあるためチェックを行う
 		if self.isContainTemplate('Syumiru/SV_A0_A0S0GACHIGUMA/ERROR.png',0.8, use_gray=True, show_value=False):
 			print("\n---------------------------------------")
