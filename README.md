@@ -23,6 +23,9 @@ ReleasesからSource code(zip)をDL
 
 【PGM共通オプション】
 <br>
+1.ソフトリセット時の待機時間
+初期値は18秒です
+<br>
 2.通知機能（LINE）
 <br>
 初期値はオフです
