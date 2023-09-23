@@ -34,22 +34,17 @@ class ScarletViolet2(ImageProcPythonCommand):
 		# マイコンをSwitchに認識させる
 		self.pressRep(Button.ZL, repeat=3, duration=0.05, interval=0.8, wait=0.5)
 		# ----------------------------------------------------------------------------------------------------------------------
-		# ソフトリセット時にオープニング画面でAボタンを押してからフィールド画面に移行するまでの待機時間．
-		# 作者の環境では約18秒でしたが厳選に使用するデータの環境に合わせて適宜編集してください．
-		self.WAIT_TIME = 18.0
 		#iniファイルを参照する
 		SyumiruSelectionModule.Config_Read(self)
 		#LINE通知機能のテスト
 		SyumiruSelectionModule.LINE_TEST(self)
 		# ----------------------------------------------------------------------------------------------------------------------
-
 		# 海外言語で厳選する方は以下をご確認ください ---------------------------------------------------------------------------------
 		# 日本語以外のガチグマを厳選する場合、画像認識に使用するキャプチャの書き換えが必須となります．
 		# 戦闘画面で技選択後，画面下部に表示される「野生のガチグマの～」の「ガチグマ」に該当する部分をPoke-Controllerでキャプチャしてください．
 		# 余白を入れないように文字だけを切り取ったら，SV_A0_A0S0GACHIGUMAフォルダにGACHIGUMA_ATTACK.pngの名称で保存してください．
 		# キャプチャ書き換え後に戦闘画面で正常に読み取りできない場合は当プログラム99行目の座標を編集してください．
 		# -----------------------------------------------------------------------------------------------------------------------
-
 		# 周回数を記録します
 		self.LOOP_COUNT = 0
 		# リセット時のエラー回数を記録します
@@ -110,7 +105,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			# ガチグマのステータス画面へ移行
 			self.press(Direction.RIGHT, wait=1.0)
 			# 攻撃判定（103判定）
-			if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
+			if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\n★A0-1です★")
 				print("\n---------------------------------------")
@@ -134,7 +129,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 				# A0かつS0を厳選する場合
 				else:
 				# 素早さ判定（77判定）
-					if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+					if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 						print("\n---------------------------------------")
 						print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
@@ -151,7 +146,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 						# プログラムを終了する
 						self.finish()
 					# 素早さ判定（78判定）
-					elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+					elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 						print("\n---------------------------------------")
 						print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
@@ -169,27 +164,27 @@ class ScarletViolet2(ImageProcPythonCommand):
 			# 実数値判定テスト機能
 			if self.Test_Check_Status == 0:
    			# 攻撃判定（124判定）※テスト
-				if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  0.9, use_gray=True, show_value=False):
+				if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nA31です")
 					print("\n---------------------------------------")	
 				# 攻撃判定（103判定）※テスト
-				elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
+				elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nA0-1です")
 					print("\n---------------------------------------")	
 				# 素早さ判定（99判定）※テスト
-				if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nS31です")
 					print("\n---------------------------------------")
 				# 素早さ判定（77判定）※テスト
-				elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nS0です")
 					print("\n---------------------------------------")
 				# 素早さ判定（78判定）※テスト
-				elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nS1です")
 					print("\n---------------------------------------")
@@ -198,6 +193,6 @@ class ScarletViolet2(ImageProcPythonCommand):
 				print("\n---------------------------------------")
 				self.wait(5.0)	
 			# ソフトリセット
-			SyumiruSelectionModule.SOFT_RESET()
+			SyumiruSelectionModule.SOFT_RESET(self)
 			# プログラムの先頭に戻る
 			self.wait(0.5)						
