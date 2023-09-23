@@ -92,7 +92,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			while self.Ball_Count < self.Choice_Ball:
 				# 左を押下
 				self.press(Direction.LEFT, wait=0.3)
-				i += 1
+				self.Ball_Count += 1
 			# ボール決定
 			self.press(Button.A,0.05,0.05)
 			self.wait(20.0)
@@ -110,7 +110,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			# ガチグマのステータス画面へ移行
 			self.press(Direction.RIGHT, wait=1.0)
 			# 攻撃判定（103判定）
-			if self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
+			if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\n★A0-1です★")
 				print("\n---------------------------------------")
@@ -134,7 +134,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 				# A0かつS0を厳選する場合
 				else:
 				# 素早さ判定（77判定）
-					if self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+					if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 						print("\n---------------------------------------")
 						print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
@@ -151,7 +151,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 						# プログラムを終了する
 						self.finish()
 					# 素早さ判定（78判定）
-					elif self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+					elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 						print("\n---------------------------------------")
 						print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
@@ -169,27 +169,27 @@ class ScarletViolet2(ImageProcPythonCommand):
 			# 実数値判定テスト機能
 			if self.Test_Check_Status == 0:
    			# 攻撃判定（124判定）※テスト
-				if self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  0.9, use_gray=True, show_value=False):
+				if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nA31です")
 					print("\n---------------------------------------")	
 				# 攻撃判定（103判定）※テスト
-				elif self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
+				elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nA0-1です")
 					print("\n---------------------------------------")	
 				# 素早さ判定（99判定）※テスト
-				if self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				if SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nS31です")
 					print("\n---------------------------------------")
 				# 素早さ判定（77判定）※テスト
-				elif self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nS0です")
 					print("\n---------------------------------------")
 				# 素早さ判定（78判定）※テスト
-				elif self.SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
+				elif SyumiruSelectionModule.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], 0.9, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
 					print("\nS1です")
 					print("\n---------------------------------------")
