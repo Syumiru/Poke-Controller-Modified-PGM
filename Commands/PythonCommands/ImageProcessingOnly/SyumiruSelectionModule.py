@@ -30,12 +30,23 @@ def Config_Read(self):
 	Choice_Ball ='Choice_Ball'
 	Pokedex ='Pokedex'
 	Test_Check_Status = 'Test_Check_Status'
- 
+	A103 = 'A103'
+	S77 = 'S77'
+	S78 = 'S78'
+	A124 = 'A124'
+	S99 = 'S99'
+	ScreenShot = 'ScreenShot'
 	self.Check_Speed = config.getint(SV_A0_A0S0GACHIGUMA,Check_Speed)
 	self.Choice_Ball = config.getint(SV_A0_A0S0GACHIGUMA,Choice_Ball)
 	self.Pokedex = config.getint(SV_A0_A0S0GACHIGUMA,Pokedex)
 	self.Test_Check_Status = config.getint(SV_A0_A0S0GACHIGUMA,Test_Check_Status)
- 
+	self.A103 = config.getfloat(SV_A0_A0S0GACHIGUMA,A103)
+	self.S77 = config.getfloat(SV_A0_A0S0GACHIGUMA,S77)
+	self.S78 = config.getfloat(SV_A0_A0S0GACHIGUMA,S78)
+	self.A124 = config.getfloat(SV_A0_A0S0GACHIGUMA,A124)
+	self.S99 = config.getfloat(SV_A0_A0S0GACHIGUMA,S99)
+	self.ScreenShot = config.getint(SV_A0_A0S0GACHIGUMA,ScreenShot)
+
 	SV_C0_Paojian = 'SV_C0_Paojian'
 	No_Correction_Only = 'No_Correction_Only'
  
