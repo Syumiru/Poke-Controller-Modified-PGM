@@ -35,6 +35,9 @@ def Config_Read(self):
 	S78 = 'S78'
 	A124 = 'A124'
 	S99 = 'S99'
+	Battle_Scene = 'Battle_Scene'
+	Battle_Command = 'Battle_Command'
+	Gachiguma_Attack = 'Gachiguma_Attack'
 	ScreenShot = 'ScreenShot'
 	self.Check_Speed = config.getint(SV_A0_A0S0GACHIGUMA,Check_Speed)
 	self.Choice_Ball = config.getint(SV_A0_A0S0GACHIGUMA,Choice_Ball)
@@ -45,8 +48,10 @@ def Config_Read(self):
 	self.S78 = config.getfloat(SV_A0_A0S0GACHIGUMA,S78)
 	self.A124 = config.getfloat(SV_A0_A0S0GACHIGUMA,A124)
 	self.S99 = config.getfloat(SV_A0_A0S0GACHIGUMA,S99)
+	self.Battle_Scene = config.getfloat(SV_A0_A0S0GACHIGUMA,Battle_Scene)
+	self.Battle_Command = config.getfloat(SV_A0_A0S0GACHIGUMA,Battle_Command)
+	self.Gachiguma_Attack = config.getfloat(SV_A0_A0S0GACHIGUMA,Gachiguma_Attack)
 	self.ScreenShot = config.getint(SV_A0_A0S0GACHIGUMA,ScreenShot)
-
 	SV_C0_Paojian = 'SV_C0_Paojian'
 	No_Correction_Only = 'No_Correction_Only'
  
