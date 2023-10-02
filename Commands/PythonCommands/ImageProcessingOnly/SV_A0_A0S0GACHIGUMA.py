@@ -23,6 +23,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 		print("\n\n--------------------------------------------------")
 		print("\nDeveloped By Syumiru (@PokeSyumiru)")
 		print("\nTested By @ASTRY")
+		print("\nUpdated By アリス (@Alice_lonewolf)")
 		print("\nSpecial Thanks to お修羅 (@_Oshura_)")
 		print("\nSpecial Thanks to こちゃてす (@kochatece12)") 
 		print("\nSpecial Thanks to PokeconDeveloppers") 
@@ -63,28 +64,32 @@ class ScarletViolet2(ImageProcPythonCommand):
 			print(f"\n周回数：{self.LOOP_COUNT} エラー: {self.ERROR_COUNT} / {(int(Time_Clock / 3600))}時間 {(int(Time_Clock / 60) % 60)}分 {(int(Time_Clock % 60))}秒")
 			print("\n---------------------------------------\n")
 			# 赫月ガチグマとの戦闘画面になるまでAボタン連打
-			while not self.isContainTemplate('Syumiru/SV_A0_A0S0GACHIGUMA/!!!!.png', 0.97, use_gray=False, show_value=False):
+			while not self.isContainTemplate('Syumiru/SV_A0_A0S0GACHIGUMA/!!!!.png', self.Battle_Scene, use_gray=False, show_value=False):
 				self.press(Button.A,0.05,0.05)
 			self.wait(0.5)
 			print("\n---------------------------------------")
 			print("\n★赫月ガチグマとエンカウント 戦闘開始★")
 			print("\n---------------------------------------")
 			# コマンド出現まで待機
-			while not self.isContainTemplate('Syumiru/SV_A0_A0S0GACHIGUMA/BATTLE_COMMANDS.png', 0.8, use_gray=True, show_value=False):
+			while not self.isContainTemplate('Syumiru/SV_A0_A0S0GACHIGUMA/BATTLE_COMMANDS.png', self.Battle_Command, use_gray=True, show_value=False):
 				self.wait(0.5)
 			self.wait(1.0)
 			# 攻撃コマンドを選択
 			self.pressRep(Button.A, repeat=2, duration=0.05, interval=0.8, wait=1.7)
-            # 赫月ガチグマに先制を取られた場合はS0ではない
-			if self.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], 0.8, use_gray=True, show_value=False):
+			# 実数値判定テストがオフかつA0~1S0~1赫月ガチグマを厳選する場合は判定を行う
+            # 赫月ガチグマに先制を取られた場合はS0ではないためソフトリセットを行う
+			if self.Test_Check_Status == 0 and self.Check_Speed == 1 and SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], self.Gachiguma_Attack, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\n★赫月ガチグマがS0である可能性: なし★")
+				print("\nソフトリセットします")
 				print("\n---------------------------------------")			
 			# 手持ちのポケモンが先制を取った場合はS0かも
-			else:				
-				print("\n---------------------------------------")
-				print("\n★赫月ガチグマがS0である可能性: あり★")
-				print("\n---------------------------------------")
+			else:
+				# A0~1S0~1赫月ガチグマを厳選する場合のみ出力
+				if self.Check_Speed == 1:
+					print("\n---------------------------------------")
+					print("\n★赫月ガチグマがS0である可能性: あり★")
+					print("\n---------------------------------------")
 				# 演出待機
 				self.wait(16.5)
 				# 判定
@@ -207,40 +212,4 @@ class ScarletViolet2(ImageProcPythonCommand):
 			# ソフトリセット
 			SyumiruSelectionModule.SOFT_RESET(self)
 			# プログラムの先頭に戻る
-			self.wait(0.5)		
-
-  # 画面内の座標を指定して認識を行うための関数(こちゃてす@kochatece12さんのプログラムからお借りしています)
-	def isContainTemplateSuper(self, template_path, search_range, threshold=0.7, use_gray=True, show_value=False,print_value=0.5,Coordinate=False):
-		TEMPLATE_PATH = "./Template/"
-		src = self.camera.readFrame()
-		# ↓座標を指定する場合は [y座標最小,y座標最大,x座標最小,x座標最大] で入力します
-		src = src[search_range[0]:search_range[1],search_range[2]:search_range[3]]
-		src = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY) if use_gray else src
-
-		template = cv2.imread(TEMPLATE_PATH+template_path, cv2.IMREAD_GRAYSCALE if use_gray else cv2.IMREAD_COLOR)
-		w, h = template.shape[1], template.shape[0]
-
-		method = cv2.TM_CCOEFF_NORMED
-		res = cv2.matchTemplate(src, template, method)
-		_, max_val, _, max_loc = cv2.minMaxLoc(res)
-
-		if show_value:
-			if max_val > print_value:
-				print(template_path + ' value: ' + str(round(max_val,3)))
-		
-		top_left = max_loc
-		bottom_right = (top_left[0] + w, top_left[1] + h)
-		if max_val > threshold:
-			if use_gray:
-				src = cv2.cvtColor(src, cv2.COLOR_GRAY2BGR)
-			if Coordinate:
-				return True, bottom_right
-			else:
-				return True
-		else:
-			if Coordinate:
-				return False, bottom_right
-			else:
-				return False
-			
-	
+			self.wait(0.5)
