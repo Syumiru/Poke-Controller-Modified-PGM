@@ -75,126 +75,172 @@ class ScarletViolet2(ImageProcPythonCommand):
 			self.wait(1.0)
 			# 攻撃コマンドを選択
 			self.pressRep(Button.A, repeat=2, duration=0.05, interval=0.8, wait=1.7)
-			# 演出待機
-			self.wait(16.5)
-			# 判定
-			# 捕まえるを選択
-			self.press(Button.A,0.05,0.05)
-			self.wait(0.6)
-			# ボールカウント初期化
-			self.Ball_Count = 0
-			# ボール選択
-			while self.Ball_Count < self.Choice_Ball:
-				# 左を押下
-				self.press(Direction.LEFT, wait=0.3)
-				self.Ball_Count += 1
-			# ボール決定
-			self.press(Button.A,0.05,0.05)
-			self.wait(20.0)
-			if self.Pokedex == 1:
-				# 図鑑登録でテキスト送り
+            # 赫月ガチグマに先制を取られた場合はS0ではない
+			if self.isContainTemplateSuper('Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], 0.8, use_gray=True, show_value=False):
+				print("\n---------------------------------------")
+				print("\n★赫月ガチグマがS0である可能性: なし★")
+				print("\n---------------------------------------")			
+			# 手持ちのポケモンが先制を取った場合はS0かも
+			else:				
+				print("\n---------------------------------------")
+				print("\n★赫月ガチグマがS0である可能性: あり★")
+				print("\n---------------------------------------")
+				# 演出待機
+				self.wait(16.5)
+				# 判定
+				# 捕まえるを選択
+				self.press(Button.A,0.05,0.05)
+				self.wait(0.6)
+				# ボールカウント初期化
+				self.Ball_Count = 0
+				# ボール選択
+				while self.Ball_Count < self.Choice_Ball:
+					# 左を押下
+					self.press(Direction.LEFT, wait=0.3)
+					self.Ball_Count += 1
+				# ボール決定
+				self.press(Button.A,0.05,0.05)
+				self.wait(20.0)
+				if self.Pokedex == 1:
+					# 図鑑登録でテキスト送り
+					self.press(Button.A,0.05,0.05)
+					self.wait(1.0)
+				# ステータス確認
+				# 下を押下
+				self.press(Direction.DOWN, wait=0.5)
+				# ガチグマのステータス確認を選択
 				self.press(Button.A,0.05,0.05)
 				self.wait(1.0)
-			# ステータス確認
-			# 下を押下
-			self.press(Direction.DOWN, wait=0.5)
-			# ガチグマのステータス確認を選択
-			self.press(Button.A,0.05,0.05)
-			self.wait(1.0)
-			# ガチグマのステータス画面へ移行bbbb
-			self.press(Direction.RIGHT, wait=1.0)
-			# 攻撃判定（103判定）
-			if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], self.A103, use_gray=True, show_value=False):
-				print("\n---------------------------------------")
-				print("\n★A0-1です★")
-				print("\n---------------------------------------")
-				# A0を厳選する場合
-				if self.Check_Speed == 0:
-					#notification.notify(title='★S0赫月ガチグマ厳選',message='S0出現の可能性あり',app_name='Poke-Controller')
+				# ガチグマのステータス画面へ移行bbbb
+				self.press(Direction.RIGHT, wait=1.0)
+				# 攻撃判定（103判定）
+				if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], self.A103, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
-					print("\n★A0-1赫月ガチグマを捕獲しました★")
+					print("\n★A0-1です★")
 					print("\n---------------------------------------")
-					# LINE通知機能
-					if self.Line_Notify_Switch:
-						# 厳選完了報告をLINEに送信します
-						SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-							f"赫月ガチグマを捕獲しました\n"
-							f"確認お願いします。", True)
-					# HOMEボタンを長押ししてスリープ
-					self.press(Button.HOME,2,2)
-					self.press(Button.A,0.05,0.05)
-					# プログラムを終了する
-					self.finish()
-				# A0かつS0を厳選する場合
-				else:
-				# 素早さ判定（77判定）
-					if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], self.S77, use_gray=True, show_value=False):
+					# A0を厳選する場合
+					if self.Check_Speed == 1:
+						#notification.notify(title='★S0赫月ガチグマ厳選',message='S0出現の可能性あり',app_name='Poke-Controller')
 						print("\n---------------------------------------")
-						print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
+						print("\n★A0-1赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
 						# LINE通知機能
 						if self.Line_Notify_Switch:
 							# 厳選完了報告をLINEに送信します
 							SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-								f"A0-1かつS0の\n"
-								f"赫月ガチグマを捕獲しました", True)
-      
+								f"赫月ガチグマを捕獲しました\n"
+								f"確認お願いします。", True)
 						# HOMEボタンを長押ししてスリープ
 						self.press(Button.HOME,2,2)
 						self.press(Button.A,0.05,0.05)
 						# プログラムを終了する
 						self.finish()
-					# 素早さ判定（78判定）
+					# A0かつS0を厳選する場合
+					else:
+					# 素早さ判定（77判定）
+						if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], self.S77, use_gray=True, show_value=False):
+							print("\n---------------------------------------")
+							print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
+							print("\n---------------------------------------")
+							# LINE通知機能
+							if self.Line_Notify_Switch:
+								# 厳選完了報告をLINEに送信します
+								SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
+									f"A0-1かつS0の\n"
+									f"赫月ガチグマを捕獲しました", True)
+		
+							# HOMEボタンを長押ししてスリープ
+							self.press(Button.HOME,2,2)
+							self.press(Button.A,0.05,0.05)
+							# プログラムを終了する
+							self.finish()
+						# 素早さ判定（78判定）
+						elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], self.S78, use_gray=True, show_value=False):
+							print("\n---------------------------------------")
+							print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
+							print("\n---------------------------------------")
+							if self.Line_Notify_Switch:
+								# LINE通知機能
+								# 厳選完了報告をLINEに送信します
+								SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
+									f"A0-1かつS1の\n"
+									f"赫月ガチグマを捕獲しました", True)
+							# HOMEボタンを長押ししてスリープ
+							self.press(Button.HOME,2,2)
+							self.press(Button.A,0.05,0.05)
+							# プログラムを終了する
+							self.finish()
+				# 実数値判定テスト機能
+				if self.Test_Check_Status == 0:
+				# 攻撃判定（124判定）※テスト
+					if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  self.A124, use_gray=True, show_value=False):
+						print("\n---------------------------------------")
+						print("\nA31です")
+						print("\n---------------------------------------")	
+					# 攻撃判定（103判定）※テスト
+					elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], self.A103, use_gray=True, show_value=False):
+						print("\n---------------------------------------")
+						print("\nA0-1です")
+						print("\n---------------------------------------")
+					# 素早さ判定（99判定）※テスト
+					if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], self.S99, use_gray=True, show_value=False):
+						print("\n---------------------------------------")
+						print("\nS31です")
+						print("\n---------------------------------------")
+					# 素早さ判定（77判定）※テスト
+					elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], self.S77, use_gray=True, show_value=False):
+						print("\n---------------------------------------")
+						print("\nS0です")
+						print("\n---------------------------------------")
+					# 素早さ判定（78判定）※テスト
 					elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], self.S78, use_gray=True, show_value=False):
 						print("\n---------------------------------------")
-						print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
+						print("\nS1です")
 						print("\n---------------------------------------")
-						if self.Line_Notify_Switch:
-							# LINE通知機能
-							# 厳選完了報告をLINEに送信します
-							SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-								f"A0-1かつS1の\n"
-								f"赫月ガチグマを捕獲しました", True)
-						# HOMEボタンを長押ししてスリープ
-						self.press(Button.HOME,2,2)
-						self.press(Button.A,0.05,0.05)
-						# プログラムを終了する
-						self.finish()
-			# 実数値判定テスト機能
-			if self.Test_Check_Status == 0:
-   			# 攻撃判定（124判定）※テスト
-				if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/124.png', [248,272,1088,1139],  self.A124, use_gray=True, show_value=False):
 					print("\n---------------------------------------")
-					print("\nA31です")
-					print("\n---------------------------------------")	
-				# 攻撃判定（103判定）※テスト
-				elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/103.png', [248,272,1088,1139], self.A103, use_gray=True, show_value=False):
+					print("\n5秒後にソフトリセットします")
 					print("\n---------------------------------------")
-					print("\nA0-1です")
-					print("\n---------------------------------------")
-				# 素早さ判定（99判定）※テスト
-				if SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/99.png', [449,472,957,991], self.S99, use_gray=True, show_value=False):
-					print("\n---------------------------------------")
-					print("\nS31です")
-					print("\n---------------------------------------")
-				# 素早さ判定（77判定）※テスト
-				elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/77.png', [449,472,957,991], self.S77, use_gray=True, show_value=False):
-					print("\n---------------------------------------")
-					print("\nS0です")
-					print("\n---------------------------------------")
-				# 素早さ判定（78判定）※テスト
-				elif SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/78.png', [449,472,957,991], self.S78, use_gray=True, show_value=False):
-					print("\n---------------------------------------")
-					print("\nS1です")
-					print("\n---------------------------------------")
-				print("\n---------------------------------------")
-				print("\n5秒後にソフトリセットします")
-				print("\n---------------------------------------")
-				self.wait(5.0)	
-			# スクショ保存
-			if self.ScreenShot == 1:
-				self.camera.saveCapture()
+					self.wait(5.0)	
+				# スクショ保存
+				if self.ScreenShot == 1:
+					self.camera.saveCapture()
 			# ソフトリセット
 			SyumiruSelectionModule.SOFT_RESET(self)
 			# プログラムの先頭に戻る
-			self.wait(0.5)						
+			self.wait(0.5)		
+
+  # 画面内の座標を指定して認識を行うための関数(こちゃてす@kochatece12さんのプログラムからお借りしています)
+	def isContainTemplateSuper(self, template_path, search_range, threshold=0.7, use_gray=True, show_value=False,print_value=0.5,Coordinate=False):
+		TEMPLATE_PATH = "./Template/"
+		src = self.camera.readFrame()
+		# ↓座標を指定する場合は [y座標最小,y座標最大,x座標最小,x座標最大] で入力します
+		src = src[search_range[0]:search_range[1],search_range[2]:search_range[3]]
+		src = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY) if use_gray else src
+
+		template = cv2.imread(TEMPLATE_PATH+template_path, cv2.IMREAD_GRAYSCALE if use_gray else cv2.IMREAD_COLOR)
+		w, h = template.shape[1], template.shape[0]
+
+		method = cv2.TM_CCOEFF_NORMED
+		res = cv2.matchTemplate(src, template, method)
+		_, max_val, _, max_loc = cv2.minMaxLoc(res)
+
+		if show_value:
+			if max_val > print_value:
+				print(template_path + ' value: ' + str(round(max_val,3)))
+		
+		top_left = max_loc
+		bottom_right = (top_left[0] + w, top_left[1] + h)
+		if max_val > threshold:
+			if use_gray:
+				src = cv2.cvtColor(src, cv2.COLOR_GRAY2BGR)
+			if Coordinate:
+				return True, bottom_right
+			else:
+				return True
+		else:
+			if Coordinate:
+				return False, bottom_right
+			else:
+				return False
+			
+	
