@@ -125,7 +125,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 					print("\n★A0-1です★")
 					print("\n---------------------------------------")
 					# A0を厳選する場合
-					if self.Check_Speed == 1:
+					if self.Check_Speed == 0:
 						#notification.notify(title='★S0赫月ガチグマ厳選',message='S0出現の可能性あり',app_name='Poke-Controller')
 						print("\n---------------------------------------")
 						print("\n★A0-1赫月ガチグマを捕獲しました★")
