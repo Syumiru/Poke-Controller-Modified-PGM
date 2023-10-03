@@ -57,6 +57,7 @@ A0-1かつS0-1厳選を両立したい方はS0オリーヴァLv.100はなびら�
 <br>
 S0個体を狙う場合は実数値78にしましょう。
 <br>
+<br>
 S0-1のみを手早く厳選したい方はお修羅さんのPGMがおすすめです。
 https://drive.google.com/drive/u/0/folders/1RIktFkyo1QeqIJUd81McMMMUVlyo6F9O
 <br>
