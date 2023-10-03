@@ -92,7 +92,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 					print("\n★赫月ガチグマがS0である可能性: あり★")
 					print("\n---------------------------------------")
      				# オリーヴァによる攻撃で超低確率なる事象へ対応。再度攻撃が必要になる場合を考慮しリードタイムを設ける
-					self.wait(16.5)
+					self.wait(26.5)
 				# 演出待機
 				self.wait(16.5)
 				# 判定
