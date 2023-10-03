@@ -36,7 +36,7 @@ ReleasesからSource code(zip)をDL
 
 ## PGM共通オプション
 setting.iniファイルを確認し必要に応じて変更して下さい。
-変更方法の説明はもファイル内にあります。
+変更方法の説明はファイル内にあります。
 
 ## PGM紹介
 ### 1.SV_A0_A0S0GACHIGUMA
