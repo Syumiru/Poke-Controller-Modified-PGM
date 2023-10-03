@@ -79,11 +79,11 @@ class ScarletViolet2(ImageProcPythonCommand):
 			self.pressRep(Button.A, repeat=2, duration=0.05, interval=0.8, wait=1.7)
 			# 実数値判定テストがオフかつA0~1S0~1赫月ガチグマを厳選する場合は判定を行う
             # 赫月ガチグマに先制を取られた場合はS0ではないためソフトリセットを行う
-			if self.Test_Check_Status == 0 and self.Check_Speed == 1 and SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], self.Gachiguma_Attack, use_gray=True, show_value=False):
+			if self.Test_Check_Status == 1 and self.Check_Speed == 1 and SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], self.Gachiguma_Attack, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\n★赫月ガチグマがS0である可能性: なし★")
 				print("\nソフトリセットします")
-				print("\n---------------------------------------")			
+				print("\n---------------------------------------")
 			# 手持ちのポケモンが先制を取った場合はS0かも
 			else:
 				# A0~1S0~1赫月ガチグマを厳選する場合のみ出力
@@ -91,6 +91,8 @@ class ScarletViolet2(ImageProcPythonCommand):
 					print("\n---------------------------------------")
 					print("\n★赫月ガチグマがS0である可能性: あり★")
 					print("\n---------------------------------------")
+     				# オリーヴァによる攻撃で超低確率なる事象へ対応。再度攻撃が必要になる場合を考慮しリードタイムを設ける
+					self.wait(16.5)
 				# 演出待機
 				self.wait(16.5)
 				# 判定
@@ -125,7 +127,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 					print("\n★A0-1です★")
 					print("\n---------------------------------------")
 					# A0を厳選する場合
-					if self.Check_Speed == 1:
+					if self.Check_Speed == 0:
 						#notification.notify(title='★S0赫月ガチグマ厳選',message='S0出現の可能性あり',app_name='Poke-Controller')
 						print("\n---------------------------------------")
 						print("\n★A0-1赫月ガチグマを捕獲しました★")
