@@ -79,7 +79,7 @@ class ScarletViolet2(ImageProcPythonCommand):
 			self.pressRep(Button.A, repeat=2, duration=0.05, interval=0.8, wait=1.7)
 			# 実数値判定テストがオフかつA0~1S0~1赫月ガチグマを厳選する場合は判定を行う
             # 赫月ガチグマに先制を取られた場合はS0ではないためソフトリセットを行う
-			if self.Test_Check_Status == 0 and self.Check_Speed == 1 and SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], self.Gachiguma_Attack, use_gray=True, show_value=False):
+			if self.Test_Check_Status == 1 and self.Check_Speed == 1 and SyumiruSelectionModule.isContainTemplateSuper(self,'Syumiru/SV_A0_A0S0GACHIGUMA/GACHIGUMA_ATTACK.png', [530,562,185,495], self.Gachiguma_Attack, use_gray=True, show_value=False):
 				print("\n---------------------------------------")
 				print("\n★赫月ガチグマがS0である可能性: なし★")
 				print("\nソフトリセットします")
