@@ -5,25 +5,38 @@
 更新していただける方がいらっしゃればご連絡ください。
 大歓迎です。
 
-【PGM導入方法】
-<br>
-2通りあります。
-<br>
-方法①
-<br>
-右上緑色のcode→（codespacrタブが開かれている場合は）local→Download ZIPを押下しDL
-<br>
-\Poke-Controller-Modified\SerialController\にコピペして下さい。
-<br>
-方法②
+## PGM導入手順
+1.DL
 <br>
 ReleasesからSource code(zip)をDL
 <br>
-解凍後、Poke-Controller-Modified-PGM-x.x.x内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
-
-【PGM共通オプション】
+2.配置
 <br>
-iniファイルを確認し必要に応じて変更して下さい。
+解凍後、Poke-Controller-Modified-PGM-x.x.x内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
+<br>
+
+## PGM更新手順
+1.バックアップ
+<br>
+自分で更新したファイルをバックアップする（setting.iniなど）
+<br>
+2.DL
+<br>
+ReleasesからSource code(zip)をDL
+<br>
+3.配置
+<br>
+解凍後、Poke-Controller-Modified-PGM-x.x.x内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
+<br>
+4.差分更新
+<br>
+バックアップしたsetting.iniの設定などを手動更新してください。
+<br>
+※古いファイルを上書きすると追加されたini設定項目が消え、PGMが動作しない場合があります。
+
+## PGM共通オプション
+setting.iniファイルを確認し必要に応じて変更して下さい。
+変更方法の説明はもファイル内にあります。
 
 ## PGM紹介
 ### 1.SV_A0_A0S0GACHIGUMA
@@ -66,9 +79,12 @@ https://drive.google.com/drive/u/0/folders/1RIktFkyo1QeqIJUd81McMMMUVlyo6F9O
 
 【オプション】
 <br>
-iniファイルを確認し必要に応じて変更して下さい。
+setting.iniファイルを確認し必要に応じて変更して下さい。
+変更方法の説明はファイル内にあります。
 
 【前提】
+<br>
+0.settting.iniを確認/環境に合わせて修正することを推奨します
 <br>
 1.イベント直前でセーブされていること
 <br>
@@ -111,7 +127,8 @@ C0パオジアン厳選PGMです。厳選判定が完了した段階でPGMがス
 
 【オプション】
 <br>
-iniファイルを確認し必要に応じて変更して下さい。
+setting.iniファイルを確認し必要に応じて変更して下さい。
+変更方法の説明はファイル内にあります。
 
 【前提】
 <br>
