@@ -13,7 +13,7 @@ from Commands.PythonCommands.ImageProcessingOnly import SyumiruSelectionModule
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
 class ScarletViolet2(ImageProcPythonCommand):
-	NAME = '[SV]A0S0赫月ガチグマ厳選'
+	NAME = '[SV]A0 or A0S0赫月ガチグマ厳選'
  
 	def __init__(self, cam):
 		super().__init__(cam)
