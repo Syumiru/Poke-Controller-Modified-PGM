@@ -55,10 +55,10 @@ class paojian_c0(ImageProcPythonCommand):
             print("---------------------------------------------")            
 
             bt_count += 1
-            while not self.isContainTemplate('/Syumiru/paojian/paojian.png', threshold=0.7, use_gray=True, show_value=ikiti):      
+            while not self.isContainTemplate('Syumiru/paojian/paojian.png', threshold=0.7, use_gray=True, show_value=ikiti):      
                 self.press(Button.A, wait=0.3)
             print("わざわいのつるぎを確認しました")     
-            while not self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):      
+            while not self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):      
                 self.wait(0.1)
             print("ちからをすいとるを選択") 
             #戦う
@@ -68,7 +68,7 @@ class paojian_c0(ImageProcPythonCommand):
             #HP確認
             resetflag = False
             while True:    
-                if self.isContainTemplate('/Syumiru/paojian/HP383.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/HP383.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     count = 1
                     hp383_count += 1
                     print("HP383のためAV上昇補正です") 
@@ -76,7 +76,7 @@ class paojian_c0(ImageProcPythonCommand):
                     if self.No_Correction_Only:
                         resetflag = True
                     break                             
-                if self.isContainTemplate('/Syumiru/paojian/HP350.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/HP350.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     count = 2
                     hp350_count += 1
                     print("HP350AV下降補正のパオジアンです")
@@ -84,13 +84,13 @@ class paojian_c0(ImageProcPythonCommand):
                     if self.No_Correction_Only:
                         resetflag = True
                     break  
-                if self.isContainTemplate('/Syumiru/paojian/HP367.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/HP367.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     count = 3
                     hp367_count += 1
                     print("HP367AV補正無のパオジアンです")
                     print(count) 
                     break          
-                if self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti): 
+                if self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti): 
                     print("HPが規定外のため、リセットします")
                     resetflag = True
                     break
@@ -101,7 +101,7 @@ class paojian_c0(ImageProcPythonCommand):
 
             print("待機しています")
             self.wait(5.0)    
-            while not self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+            while not self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                 self.wait(0.1)
             print("投げつけるを選択") 
             #戦う
@@ -112,11 +112,11 @@ class paojian_c0(ImageProcPythonCommand):
 
             g_resetflag = False  
             while True:
-                if self.isContainTemplate('/Syumiru/paojian/paogain.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/paogain.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     print("パオジアン回復")
                     break
                 #カタストロフィ→ふいうちされるとフワライドがウイのみを食べてしまうため判定
-                if self.isContainTemplate('/Syumiru/paojian/gain.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+                if self.isContainTemplate('Syumiru/paojian/gain.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                     print("フワライドがウイのみを食べてしまったため後続処理不可です")
                     print("リセットします")
                     g_resetflag = True
@@ -130,7 +130,7 @@ class paojian_c0(ImageProcPythonCommand):
             
             resetflag2 = False
             while True:
-                if self.isContainTemplate('/Syumiru/paojian/konran_2.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/konran_2.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     print("混乱しました") 
                     if count == 3:
                         count = 4
@@ -143,7 +143,7 @@ class paojian_c0(ImageProcPythonCommand):
                         resetflag2 = True
                         k_count += 1                
                         break
-                if self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+                if self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                     print("ウイのみ判定結果処理完了")
                     break
             self.wait(0.1)
@@ -153,7 +153,7 @@ class paojian_c0(ImageProcPythonCommand):
 
             print("待機しています")
             self.wait(1.0)
-            while not self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+            while not self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                 self.wait(0.1)
             print("おきみやげを選択")               
             #戦う
@@ -164,7 +164,7 @@ class paojian_c0(ImageProcPythonCommand):
 
             print("待機しています")
             self.wait(1.0)    
-            while not self.isContainTemplate('/Syumiru/paojian/hinshi.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+            while not self.isContainTemplate('Syumiru/paojian/hinshi.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                 self.wait(0.1)
 
             #いれかえ
@@ -179,7 +179,7 @@ class paojian_c0(ImageProcPythonCommand):
             #アメタマ
             print("待機しています")
             self.wait(5.0)    
-            while not self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+            while not self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                 self.wait(0.1)
             print("アメタマのパワーシェアを選択") 
             #戦う
@@ -189,7 +189,7 @@ class paojian_c0(ImageProcPythonCommand):
 
             print("待機しています")
             self.wait(5.0)
-            while not self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
+            while not self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.7, use_gray=True, show_value=ikiti):            
                 self.wait(0.1)
             print("テラバーストを選択") 
             #戦う
@@ -197,7 +197,7 @@ class paojian_c0(ImageProcPythonCommand):
             #水テラバースト
             self.press(Button.R, wait=1.0)
             self.press(Direction.DOWN, wait=0.6)
-            if self.isContainTemplate('/Syumiru/paojian/waterteraba.png', threshold=0.9, use_gray=True, show_value=ikiti):
+            if self.isContainTemplate('Syumiru/paojian/waterteraba.png', threshold=0.9, use_gray=True, show_value=ikiti):
                 print("テラバースト") 
                 self.press(Button.A, wait=1.0)
 
@@ -205,10 +205,10 @@ class paojian_c0(ImageProcPythonCommand):
 
             resetflag3 = False
             while True:    
-                if self.isContainTemplate('/Syumiru/paojian/fight.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/fight.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     print("パオジアン生存")
                     break                             
-                if self.isContainTemplate('/Syumiru/paojian/paohinshi.png', threshold=0.9, use_gray=True, show_value=ikiti):
+                if self.isContainTemplate('Syumiru/paojian/paohinshi.png', threshold=0.9, use_gray=True, show_value=ikiti):
                     print("パオジアン討伐")
                     print("リセットします")
                     resetflag3 = True
@@ -219,7 +219,7 @@ class paojian_c0(ImageProcPythonCommand):
                 continue
 
             #パオジアン体力確認        
-            if self.isContainTemplate('/Syumiru/paojian/paolife.png', threshold=0.9, use_gray=True, show_value=ikiti):
+            if self.isContainTemplate('Syumiru/paojian/paolife.png', threshold=0.9, use_gray=True, show_value=ikiti):
                 print("C0,1です")
                 if self.Line_Notify_Switch:
                     SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
@@ -249,7 +249,7 @@ class paojian_c0(ImageProcPythonCommand):
         self.press(Button.A, wait=2.0) 
         self.press(Button.A, wait=2.0) 
         self.press(Button.A, wait=2.0) 
-        while not self.isContainTemplate('/Syumiru/paojian/S_TOP.png', threshold=0.8, use_gray=True, show_value=False):
+        while not self.isContainTemplate('Syumiru/paojian/S_TOP.png', threshold=0.8, use_gray=True, show_value=False):
             self.wait(0.5)
             self.press(Button.A, wait=1.0)
         print("TOP画面を認識しました。")
