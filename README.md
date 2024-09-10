@@ -8,11 +8,11 @@
 ## PGM導入手順
 1.DL
 <br>
-ReleasesからSource code(zip)をDL
+ReleasesからPoke-Controller-Modified-PGM-main.zipをDL
 <br>
 2.配置
 <br>
-解凍後、Poke-Controller-Modified-PGM-x.x.x内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
+解凍後、Poke-Controller-Modified-PGM-main内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
 <br>
 
 ## PGM更新手順
@@ -22,11 +22,11 @@ ReleasesからSource code(zip)をDL
 <br>
 2.DL
 <br>
-ReleasesからSource code(zip)をDL
+ReleasesからPoke-Controller-Modified-PGM-main.zipをDL
 <br>
 3.配置
 <br>
-解凍後、Poke-Controller-Modified-PGM-x.x.x内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
+解凍後、Poke-Controller-Modified-PGM-main内のファイルを\Poke-Controller-Modified\SerialController\にコピペして下さい。
 <br>
 4.差分更新
 <br>
