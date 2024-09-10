@@ -146,8 +146,12 @@ setting.iniファイルを確認し必要に応じて変更して下さい。
 <br>
 5.5番目はかえんだまもちこんらん無補正6VアメタマLv100
 <br>
-各アメタマ調整については下記を参照してください。
+詳しい各アメタマ個体値調整については次のissueを参照してください。
+<br>
 https://github.com/Syumiru/Poke-Controller-Modified-PGM/issues/9
+C0パオジアン厳選PGMにおけるアメタマの努力値について
+<br>
+
 <br>
 3.日本語ROM
 <br>
