@@ -19,8 +19,6 @@ class paojian_c0(ImageProcPythonCommand):
         print("プログラム開始")
         #iniファイルを参照する
         SyumiruSelectionModule.Config_Read(self)
-        #LINE通知機能のテスト
-        SyumiruSelectionModule.LINE_TEST(self)
         bt_count = 0
         tm_count = 0
         hp383_count = 0
@@ -222,9 +220,7 @@ class paojian_c0(ImageProcPythonCommand):
             if self.isContainTemplate('Syumiru/paojian/paolife.png', threshold=0.9, use_gray=True, show_value=ikiti):
                 print("C0,1です")
                 if self.Line_Notify_Switch:
-                    SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-                        f"C0-1のパオジアンです\n"
-                        f"捕獲してください")
+                    self.discord_text(self,"C0-1のパオジアンです。捕獲してください")
                 c0_count += 1 
                 self.finish()
             else:

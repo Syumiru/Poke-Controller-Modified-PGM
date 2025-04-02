@@ -4,6 +4,8 @@
 from Commands.Keys import Button
 import cv2
 import configparser
+from typing import Any
+from Commands.PythonCommandBase import ImageProcPythonCommand
 
 # iniファイルを参照する
 def Config_Read(self):
@@ -15,15 +17,6 @@ def Config_Read(self):
 	Game_Start_Wait_Time = 'Game_Start_Wait_Time'
  
 	self.Game_Start_Wait_Time = config.getfloat(SV,Game_Start_Wait_Time)
- 
-	LINE_Notify = 'LINE_Notify'
-	Line_Notify_Switch = 'Line_Notify_Switch' 
-	Line_Notify_Token = 'Line_Notify_Token'
-	Line_Notify_Token_Test = 'Line_Notify_Token_Test'
- 
-	self.Line_Notify_Switch = config.getint(LINE_Notify,Line_Notify_Switch)
-	self.Line_Notify_Token = config[LINE_Notify][Line_Notify_Token]
-	self.LINE_TEST = config.getint(LINE_Notify,Line_Notify_Token_Test)
 
 	SV_A0_A0S0GACHIGUMA = 'SV_A0_A0S0GACHIGUMA'
 	Check_Speed ='Check_Speed'
@@ -56,66 +49,6 @@ def Config_Read(self):
 	No_Correction_Only = 'No_Correction_Only'
  
 	self.No_Correction_Only = config.getint(SV_C0_Paojian,No_Correction_Only)
- 
-# ソフトリセット用の関数(元関数作成：お修羅さん(@_Oshura_))
-def LINE_TEST(self):
-	# LINE通知テストを行う場合はここを通る
-	if self.LINE_TEST == 1:
-		print("\n-----------------------------")
-		print("\n★LINE通知のテストを行います★")
-		print("\n-----------------------------")
-		print("\n通知が来ない場合LINEトークンに")
-		print("\n間違いがないか確認してください")
-		print("\n-----------------------------\n")
-		# テスト用の内容をLINEに送信します
-		LINE_Message(self,"🖋LINE通知テスト\n"
-					f"これはテスト用の通知内容です\n"
-					f"現在の画面をキャプチャしています", True)
-		# LINE通知後はプログラムを停止する
-		self.finish()
-	else:
-		pass
-# 本家Poke-Controllerをお使いの方もLINE通知が送れるようにしました(関数作成：こちゃてすさん(@Kochatece12))
-def LINE_Message(self,notification_message, Picture=False):
-	"""
-	他のプログラムにLINE通知を導入する場合
-	１.この関数全体をプログラムの一番下に入れる。(インデント込み)
-	２.以下の関数呼び出しをコピーし、プログラムの任意の位置に入れる
-
-	・テキストのみを通知する場合
-	self.LINE_Message("通知したい文章")
-	・poke-Controllerに映っている映像を画像として送信する場合
-	self.LINE_Message("通知したい文章", True)
-	"""
-	from PIL import Image
-	import io
-	try:
-		import requests
-	except:
-		print("\n---------------------------------------")
-		print("\nLINE通知を実行できません")
-		print("\nrequestsモジュールエラーです")
-		print("\n---------------------------------------\n")		
-	try:
-		line_notify_api = "https://notify-api.line.me/api/notify"
-		headers = {"Authorization": f"Bearer {self.Line_Notify_Token}"}
-		data = {"message": f"{notification_message}"}
-		files = {}
-		if Picture == True:
-			image_bgr = self.camera.readFrame()
-			image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
-			image = Image.fromarray(image_rgb)
-			png = io.BytesIO()  # 空のio.BytesIOオブジェクトを用意
-			image.save(png, format="png")  # 空のio.BytesIOオブジェクトにpngファイルとして書き込み
-			b_frame = png.getvalue()  # io.BytesIOオブジェクトをbytes形式で読みとり
-			files = {"imageFile": b_frame}
-		requests.post(line_notify_api, headers = headers, data = data, files=files)
-	except:
-		print("\n---------------------------------------")
-		print("\nLINE通知を正常に実行できません")
-		print("\nトークン設定を確認してください")
-		print("\n---------------------------------------\n")
-
 # 画面内の座標を指定して認識を行うための関数(こちゃてす@kochatece12さんのプログラムからお借りしています)
 def isContainTemplateSuper(self, template_path, search_range, threshold=0.7, use_gray=True, show_value=False,print_value=0.5,Coordinate=False):
 	TEMPLATE_PATH = "./Template/"
@@ -177,16 +110,16 @@ def SOFT_RESET(self):
 			print("\n---------------------------------------")
 			print("\n★ソフトリセット中にエラーが発生しました★")
 			print("\n---------------------------------------")
-			self.LINE_image(f"ERROR通知\nプログラム名: XX", True)
+			self.discord_text("★ソフトリセット中にエラーが発生しました★")
 			# SOFT_RESET()の先頭の処理に戻る
 			self.SOFT_ERROR = True
 			self.ERROR_COUNT += 1
 		# 本体の再起動が必要なエラーが出ている場合は直ちにプログラムを停止する
 		elif self.isContainTemplate('Syumiru/SV_A0_A0S0GACHIGUMA/ERROR_2.png',0.8, use_gray=True, show_value=False):
 			#notification.notify(title='★S0赫月ガチグマ厳選',message='危険なエラーが発生したため動作を停止します',app_name='Poke-Controller')
-			self.LINE_image(f"ERROR通知\n危険なエラーが発生しているため\nプログラムの動作を停止しました\nプログラム名: XX", True)
+			self.discord_text("危険なエラーが発生しているためプログラムの動作を停止しました")
 			print("\n---------------------------------------")
-			print("\n重要なエラー 続行不可のため動作停止します")
+			print("\n危険なエラーが発生しているためプログラムの動作を停止しました")
 			print("\n---------------------------------------\n")
 			self.finish()
 		# 起動直後にソフトエラー表示が出ていない場合はここを通る

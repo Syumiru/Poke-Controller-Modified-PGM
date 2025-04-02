@@ -39,8 +39,6 @@ class ScarletViolet2(ImageProcPythonCommand):
 		# ----------------------------------------------------------------------------------------------------------------------
 		#iniファイルを参照する
 		SyumiruSelectionModule.Config_Read(self)
-		#LINE通知機能のテスト
-		SyumiruSelectionModule.LINE_TEST(self)
 		# ----------------------------------------------------------------------------------------------------------------------
 		# 海外言語で厳選する方は以下をご確認ください ---------------------------------------------------------------------------------
 		# 日本語以外のガチグマを厳選する場合、画像認識に使用するキャプチャの書き換えが必須となります．
@@ -132,12 +130,8 @@ class ScarletViolet2(ImageProcPythonCommand):
 						print("\n---------------------------------------")
 						print("\n★A0-1赫月ガチグマを捕獲しました★")
 						print("\n---------------------------------------")
-						# LINE通知機能
-						if self.Line_Notify_Switch:
-							# 厳選完了報告をLINEに送信します
-							SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-								f"赫月ガチグマを捕獲しました\n"
-								f"確認お願いします。", True)
+						# 厳選完了報告をDiscordに送信します
+						self.discord_text("赫月ガチグマを捕獲しました。確認お願いします。")
 						# HOMEボタンを長押ししてスリープ
 						self.press(Button.HOME,2,2)
 						self.press(Button.A,0.05,0.05)
@@ -150,13 +144,8 @@ class ScarletViolet2(ImageProcPythonCommand):
 							print("\n---------------------------------------")
 							print("\n★A0-1かつS0の可能性がある赫月ガチグマを捕獲しました★")
 							print("\n---------------------------------------")
-							# LINE通知機能
-							if self.Line_Notify_Switch:
-								# 厳選完了報告をLINEに送信します
-								SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-									f"A0-1かつS0の\n"
-									f"赫月ガチグマを捕獲しました", True)
-		
+							# 厳選完了報告をDiscordに送信します
+							self.discord_text("A0-1かつS0の赫月ガチグマを捕獲しました")
 							# HOMEボタンを長押ししてスリープ
 							self.press(Button.HOME,2,2)
 							self.press(Button.A,0.05,0.05)
@@ -167,12 +156,8 @@ class ScarletViolet2(ImageProcPythonCommand):
 							print("\n---------------------------------------")
 							print("\n★A0-1かつS1の可能性がある赫月ガチグマを捕獲しました★")
 							print("\n---------------------------------------")
-							if self.Line_Notify_Switch:
-								# LINE通知機能
-								# 厳選完了報告をLINEに送信します
-								SyumiruSelectionModule.LINE_Message(self,"🖋LINE通知\n"
-									f"A0-1かつS1の\n"
-									f"赫月ガチグマを捕獲しました", True)
+							# 厳選完了報告をDiscordに送信します
+							self.discord_text("A0-1かつS0の赫月ガチグマを捕獲しました")
 							# HOMEボタンを長押ししてスリープ
 							self.press(Button.HOME,2,2)
 							self.press(Button.A,0.05,0.05)
