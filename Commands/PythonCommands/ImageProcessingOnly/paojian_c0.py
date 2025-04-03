@@ -220,7 +220,7 @@ class paojian_c0(ImageProcPythonCommand):
             if self.isContainTemplate('Syumiru/paojian/paolife.png', threshold=0.9, use_gray=True, show_value=ikiti):
                 print("C0,1です")
                 if self.Line_Notify_Switch:
-                    self.discord_text(self,"C0-1のパオジアンです。捕獲してください")
+                    self.discord_text("C0-1のパオジアンです。捕獲してください")
                 c0_count += 1 
                 self.finish()
             else:
