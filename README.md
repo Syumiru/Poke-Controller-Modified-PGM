@@ -183,6 +183,25 @@ Discord通知機能はPoke-Controller-ModifiedおよびPoke-Controller-Modified-
 <br>
 そのため、使い方はPoke-Controller-ModifiedおよびPoke-Controller-Modified-Extensionのマニュアル等をご参照ください。
 
+### 3.高速解像度変更_For_Switch2
+【概要】
+<br>
+自動→720p/720p→自動の解像度変更PGMです。
+<br>
+ポケコン自動化と通常プレイ時の使い分け目的で作成しました。
+<br>
+Extension版のショートカットを割当てて使用する想定です。
+<br>
+Switch1verも必要に応じて作成するかもです。
+<br>
+【Special Thanks】
+<br>
+フウさん（XID:@dragonite303）の高速日付変更PGMを引用して作成しています。
+<br>
+【引用元】
+<br>
+https://drive.google.com/file/d/1XEylLiM8jDNyX_f_abcgZTeHeDh65F7q/view?usp=drive_link
+
 # 免責事項
 PGMの利用によって生じた何らかのトラブル・損失・損害等の一切の責任を負いかねますのでご了承ください。
 <br>
