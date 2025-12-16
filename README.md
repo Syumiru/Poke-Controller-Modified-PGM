@@ -169,20 +169,6 @@ C0パオジアン厳選PGMにおけるアメタマの努力値について
 <br>
 ひびきさんのPGMを改修しています。
 
-# 主な更新履歴
-<br>
-【2025/04/02 LINE Notify終了に伴うDiscord通知機能追加】
-<br>
-改修に伴い、無印ポケコンでの実行は不可になったと思われます。
-<br>
-更新される方は、setting.ini以外の全てのファイルを置換してください。
-<br>
-setting.iniのLINE通知機能関連の項目は、残存していても削除しても問題ない想定です。
-<br>
-Discord通知機能はPoke-Controller-ModifiedおよびPoke-Controller-Modified-Extensionの標準機能を利用しています。
-<br>
-そのため、使い方はPoke-Controller-ModifiedおよびPoke-Controller-Modified-Extensionのマニュアル等をご参照ください。
-
 ### 3.高速解像度変更_For_Switch2
 【概要】
 <br>
@@ -201,6 +187,22 @@ Switch1verも必要に応じて作成するかもです。
 【引用元】
 <br>
 https://drive.google.com/file/d/1XEylLiM8jDNyX_f_abcgZTeHeDh65F7q/view?usp=drive_link
+
+# 主な更新履歴
+<br>
+【2025/12/16 高速解像度変更_For_Switch2】
+<br>
+【2025/04/02 LINE Notify終了に伴うDiscord通知機能追加】
+<br>
+改修に伴い、無印ポケコンでの実行は不可になったと思われます。
+<br>
+更新される方は、setting.ini以外の全てのファイルを置換してください。
+<br>
+setting.iniのLINE通知機能関連の項目は、残存していても削除しても問題ない想定です。
+<br>
+Discord通知機能はPoke-Controller-ModifiedおよびPoke-Controller-Modified-Extensionの標準機能を利用しています。
+<br>
+そのため、使い方はPoke-Controller-ModifiedおよびPoke-Controller-Modified-Extensionのマニュアル等をご参照ください。
 
 # 免責事項
 PGMの利用によって生じた何らかのトラブル・損失・損害等の一切の責任を負いかねますのでご了承ください。
